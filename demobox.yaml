@@ -1,0 +1,15 @@
+---
+- hosts: demobox
+  # vars_files:
+  #   - 'vars/vault.yaml'
+  tasks:
+    - hostname:
+        name: devrel-demobox
+  roles:
+    - role: grog.package
+    - role: geerlingguy.docker
+    - role: geerlingguy.ntp
+    - role: ironicbadger.figurine
+    - role: ironicbadger.bash_aliases
+    - role: ironicbadger.docker_compose_generator
+      tags: compose

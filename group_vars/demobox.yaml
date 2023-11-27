@@ -1,0 +1,13 @@
+---
+appdata_path: /mnt/zfsvol/appdata
+
+# ironicbadger.docker_compose_generator
+
+containers:
+  - service_name: example-nginx
+    active: true
+    image: nginx
+    volumes:
+      - "{{ appdata_path }}/nginx_sshwiki/site:/usr/share/nginx/html:ro"
+    global_env_vars: false
+    restart: unless-stopped
