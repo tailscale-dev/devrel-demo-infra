@@ -1,8 +1,10 @@
 ---
 appdata_path: /mnt/zfsvol/appdata
 
-# ironicbadger.docker_compose_generator
+# artis3n.tailscale
+tailscale_up_skip: true
 
+# ironicbadger.docker_compose_generator
 containers:
   - service_name: example-nginx
     active: true

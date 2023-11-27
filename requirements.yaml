@@ -1,6 +1,7 @@
 - src: geerlingguy.docker
 - src: geerlingguy.ntp
 - src: grog.package
+- src: artis3n.tailscale
 - src: ironicbadger.docker_compose_generator
 - src: ironicbadger.bash_aliases
 - src: ironicbadger.figurine
