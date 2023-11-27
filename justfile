@@ -15,10 +15,10 @@ log := "warn"
 export JUST_LOG := log
 
 run HOST *TAGS:
-  ansible-playbook -b demobox.yaml --limit {{HOST}} {{TAGS}}
+  ansible-playbook -b runme.yaml --limit {{HOST}} {{TAGS}}
 
 compose HOST:
-  ansible-playbook -b demobox.yaml --limit {{HOST}} --tags compose
+  ansible-playbook -b runme.yaml --limit {{HOST}} --tags compose
 
 ## repo stuff
 # optionally use --force to force reinstall all requirements
