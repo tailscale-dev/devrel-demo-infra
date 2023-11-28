@@ -1,15 +1,44 @@
 ---
-appdata_path: /mnt/zfsvol/appdata
 
 # artis3n.tailscale
 tailscale_up_skip: true
 
 # ironicbadger.docker_compose_generator
+appdata_path: /mnt/zfs/appdata
 containers:
-  - service_name: example-nginx
+  - service_name: id-demo-test
     active: true
-    image: nginx
+    image: ghcr.io/tailscale-dev/devrel-demo-infra:test
     volumes:
-      - "{{ appdata_path }}/nginx_sshwiki/site:/usr/share/nginx/html:ro"
-    global_env_vars: false
+      - "{{ appdata_path }}/id-demo-test:/var/lib/tailscale"
+    environment:
+      - "TAILSCALE_AUTHKEY={{ tsauthkey_id_demo_test }}"
+      - TAILSCALE_HOSTNAME=id-demo-docker
+      - TAILSCALE_FUNNEL=on
+      ## do not change the values below
+      - "TZ={{ ntp_timezone }}"
+      - DOCKER_MODS=ghcr.io/tailscale-dev/docker-mod:main
+      - TAILSCALE_STATE_DIR=/var/lib/tailscale
+      - TAILSCALE_SERVE_MODE=https
+      - TAILSCALE_SERVE_PORT=5000
+      - TAILSCALE_USE_SSH=0
+    global_env_vars: true
+    restart: unless-stopped
+  - service_name: id-demo-chicagotest
+    active: true
+    image: ghcr.io/tailscale-dev/devrel-demo-infra:test
+    volumes:
+      - "{{ appdata_path }}/chicagotest:/var/lib/tailscale"
+    environment:
+      - "TAILSCALE_AUTHKEY={{ tsauthkey_id_demo_test }}"
+      - TAILSCALE_HOSTNAME=chicagotest
+      - TAILSCALE_FUNNEL=on
+      ## do not change the values below
+      - "TZ={{ ntp_timezone }}"
+      - DOCKER_MODS=ghcr.io/tailscale-dev/docker-mod:main
+      - TAILSCALE_STATE_DIR=/var/lib/tailscale
+      - TAILSCALE_SERVE_MODE=https
+      - TAILSCALE_SERVE_PORT=5000
+      - TAILSCALE_USE_SSH=0
+    global_env_vars: true
     restart: unless-stopped

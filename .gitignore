@@ -4,6 +4,7 @@
 ### Ansible ###
 *.retry
 galaxy_roles/
+.vault-password
 
 ### Git ###
 # Created by git for backups. To disable backups in Git:
