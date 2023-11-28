@@ -26,6 +26,7 @@ containers:
 ```
 
 + `image: ghcr.io/tailscale-dev/devrel-demo-infra:test` = This can be any docker image, but here we assume each demo has something unique so push your unique image to a unique tag.
++ `volumes:` it is important that each container instance has its own volume as this is used to store tailscale daemon state.
 + `TAILSCALE_AUTHKEY` = The authkey is encrypted in `vars/vault.yaml`. To add a new key run `just vault decrypt`, edit `vault.yaml` and then `just vault encrypt`.
 + `TAILSCALE_HOSTNAME` = This is the hostname that funnel/serve will use. E.g. your demo will be at `id-demo-docker.pango-lin.ts.net`.
 + `TAILSCALE_FUNNEL` = Turns funnel on or off.
