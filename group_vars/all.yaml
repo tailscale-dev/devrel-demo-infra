@@ -28,3 +28,16 @@ bash_aliases:
   - { alias: "appdata", command: "cd /mnt/tank/appdata" }
   - { alias: "zspace", command: "zfs list -o space" }
   - { alias: "zsnap", command: "zfs list -t snapshot" }
+
+# ironicbadger.docker_compose_generator
+main_uid: "1000"
+main_gid: "{{ main_uid }}"
+global_env_vars:
+  - "PUID={{ main_uid }}"
+  - "PGID={{ main_gid }}"
+  - "TZ={{ ntp_timezone }}"
+  - DOCKER_MODS=ghcr.io/tailscale-dev/docker-mod:main
+  - TAILSCALE_STATE_DIR=/var/lib/tailscale
+  - TAILSCALE_SERVE_MODE=https
+  - TAILSCALE_SERVE_PORT=5000
+  - TAILSCALE_USE_SSH=0
