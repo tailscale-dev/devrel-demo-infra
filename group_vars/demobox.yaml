@@ -1,30 +1,15 @@
 ---
 
-# artis3n.tailscale
-tailscale_up_skip: true
-
 # ironicbadger.docker_compose_generator
-appdata_path: /mnt/zfs/appdata
 containers:
-  - service_name: id-demo-test
+  - service_name: id-demo-leaddev-berlin
     active: true
-    image: ghcr.io/tailscale-dev/devrel-demo-infra:test
+    image: ghcr.io/tailscale-dev/demo-id-headers:leaddev-berlin
     volumes:
-      - "{{ appdata_path }}/id-demo-test:/var/lib/tailscale"
+      - "{{ appdata_path }}/2023/leaddev-berlin:/var/lib/tailscale"
     environment:
       - "TAILSCALE_AUTHKEY={{ tsauthkey_id_demo_test }}"
-      - TAILSCALE_HOSTNAME=id-demo-docker
-      - TAILSCALE_FUNNEL=on
-    include_global_env_vars: true
-    restart: unless-stopped
-  - service_name: id-demo-chicagotest
-    active: true
-    image: ghcr.io/tailscale-dev/devrel-demo-infra:test
-    volumes:
-      - "{{ appdata_path }}/chicagotest:/var/lib/tailscale"
-    environment:
-      - "TAILSCALE_AUTHKEY={{ tsauthkey_id_demo_test }}"
-      - TAILSCALE_HOSTNAME=chicagotest
+      - TAILSCALE_HOSTNAME=berlin23
       - TAILSCALE_FUNNEL=on
     include_global_env_vars: true
     restart: unless-stopped

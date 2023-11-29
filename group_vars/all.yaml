@@ -29,9 +29,13 @@ bash_aliases:
   - { alias: "zspace", command: "zfs list -o space" }
   - { alias: "zsnap", command: "zfs list -t snapshot" }
 
+# artis3n.tailscale
+tailscale_up_skip: true
+
 # ironicbadger.docker_compose_generator
 main_uid: "1000"
 main_gid: "{{ main_uid }}"
+appdata_path: /mnt/zfs/appdata
 global_env_vars:
   - "PUID={{ main_uid }}"
   - "PGID={{ main_gid }}"
