@@ -8,8 +8,9 @@ containers:
     volumes:
       - "{{ appdata_path }}/2023/leaddev-berlin:/var/lib/tailscale"
     environment:
-      - "TAILSCALE_AUTHKEY={{ tsauthkey_id_demo_test }}"
-      - TAILSCALE_HOSTNAME=berlin23
+      - "TAILSCALE_AUTHKEY={{ tsauthkey_devrel }}"
+      - TAILSCALE_HOSTNAME=berlin2023
       - TAILSCALE_FUNNEL=on
+      - "DEMO_INVITE_LINK={{ leaddev_berlin_invite_link }}"
     include_global_env_vars: true
     restart: unless-stopped
