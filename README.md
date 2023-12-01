@@ -21,6 +21,7 @@ containers:
       - "TAILSCALE_AUTHKEY={{ tsauthkey_id_demo_test }}"
       - TAILSCALE_HOSTNAME=id-demo-docker
       - TAILSCALE_FUNNEL=on
+      - DEMO_INVITE_LINK=https://invite.link.from.tailscale.admin.console.after.node.added.to.tailnet.com
     include_global_env_vars: true
     restart: unless-stopped
 ```
