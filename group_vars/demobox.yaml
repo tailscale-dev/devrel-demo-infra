@@ -1,7 +1,12 @@
 ---
 
 # ironicbadger.docker_compose_generator
+appdata_path: /mnt/zfs/appdata
 containers:
+  ########################
+  ## Copy this block and modify for each additional demo required
+  ########################
+  ## Lead Dev Berlin - Dec 2023
   - service_name: id-demo-leaddev-berlin
     active: true
     image: ghcr.io/tailscale-dev/demo-id-headers:leaddev-berlin
