@@ -1,0 +1,55 @@
+---
+
+# ironicbadger.docker_compose_generator
+appdata_path: /mnt/zfs/appdata
+containers:
+  - service_name: traefik
+    active: true
+    image: traefik
+    volumes:
+      - "/opt/appdata/traefik/letsencrypt:/letsencrypt"
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    command:
+      - "--log.level=DEBUG"
+      - "--api.insecure=false"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.tsresolver.acme.httpchallenge=true"
+      - "--certificatesresolvers.tsresolver.acme.httpchallenge.entrypoint=web"
+      #- "--certificatesresolvers.tsresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
+      - "--certificatesresolvers.tsresolver.acme.email=infra+tailandscales@tailscale.com"
+      - "--certificatesresolvers.tsresolver.acme.storage=/letsencrypt/acme.json"
+    ports:
+      - "80:80"
+      - "443:443"
+    include_global_env_vars: false
+    restart: unless-stopped
+  - service_name: tailandscalesdotcom
+    active: true
+    image: ghcr.io/tailscale-dev/society-of-pangolin-enthusiasts:latest
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.tscom.rule=Host(`tailandscales.com`)"
+      - "traefik.http.routers.tscom.entrypoints=websecure"
+      - "traefik.http.routers.tscom.tls.certresolver=tsresolver"
+      - "traefik.http.services.tscom.loadbalancer.server.port=8080"
+
+  ########################
+  ## Copy this block and modify for each additional demo required
+  ########################
+
+  ## Lead Dev Berlin - Dec 2023
+  - service_name: id-demo-leaddev-berlin
+    active: false
+    image: ghcr.io/tailscale-dev/demo-id-headers:leaddev-berlin
+    volumes:
+      - "{{ appdata_path }}/2023/leaddev-berlin:/var/lib/tailscale"
+    environment:
+      - "TAILSCALE_AUTHKEY={{ tsauthkey_devrel }}"
+      - TAILSCALE_HOSTNAME=berlin2023
+      - TAILSCALE_FUNNEL=on
+      - "DEMO_INVITE_LINK={{ leaddev_berlin_invite_link }}"
+    include_global_env_vars: true
+    restart: unless-stopped
