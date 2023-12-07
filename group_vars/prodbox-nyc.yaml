@@ -10,7 +10,7 @@ containers:
       - "/opt/appdata/traefik/letsencrypt:/letsencrypt"
       - /var/run/docker.sock:/var/run/docker.sock:ro
     command:
-      - "--log.level=DEBUG"
+      #- "--log.level=DEBUG"
       - "--api.insecure=false"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
