@@ -37,3 +37,20 @@ containers:
       - "traefik.http.routers.tscom.entrypoints=websecure"
       - "traefik.http.routers.tscom.tls.certresolver=tsresolver"
       - "traefik.http.services.tscom.loadbalancer.server.port=8080"
+  ## DO NOT MODIFY ABOVE THIS LINE
+  ########################
+  ## Copy this block and modify for each additional demo required
+  ########################
+  ## SCaLE March 2024
+  - service_name: id-demo-scale2024
+    active: true
+    image: ghcr.io/tailscale-dev/demo-id-headers:scale2024
+    volumes:
+      - "{{ appdata_path }}/2024/scale2024:/var/lib/tailscale"
+    environment:
+      - "TAILSCALE_AUTHKEY={{ tsauthkey_devrel }}"
+      - TAILSCALE_HOSTNAME=scale2024
+      - TAILSCALE_FUNNEL=on
+      - "DEMO_INVITE_LINK={{ scale2024_invite_link }}"
+    include_global_env_vars: true
+    restart: unless-stopped
