@@ -41,16 +41,16 @@ containers:
   ########################
   ## Copy this block and modify for each additional demo required
   ########################
-  ## SCaLE March 2024
-  - service_name: id-demo-scale2024
+  ## DoD Austin 2024
+  - service_name: id-demo-dodaustin2024
     active: true
-    image: ghcr.io/tailscale-dev/demo-id-headers:scale2024
+    image: ghcr.io/tailscale-dev/demo-id-headers:dodaustin
     volumes:
-      - "{{ appdata_path }}/2024/scale2024:/var/lib/tailscale"
+      - "{{ appdata_path }}/2024/dod2024:/var/lib/tailscale"
     environment:
       - "TAILSCALE_AUTHKEY={{ tsauthkey_devrel }}"
-      - TAILSCALE_HOSTNAME=scale2024
+      - TAILSCALE_HOSTNAME=dod2024
       - TAILSCALE_FUNNEL=on
-      - "DEMO_INVITE_LINK={{ scale2024_invite_link }}"
+      - "DEMO_INVITE_LINK={{ dod2024_invite_link }}"
     include_global_env_vars: true
     restart: unless-stopped
